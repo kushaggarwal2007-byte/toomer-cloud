@@ -1,5 +1,3 @@
 #!/bin/bash
-# Start trading bot in background
 python -u toomer_fast_bot.py &
-# Start web portal for mobile access
-python -u toomer_pro_portal.py
+gunicorn --bind 0.0.0.0:8080 toomer_pro_portal:app
