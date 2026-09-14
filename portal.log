@@ -1,0 +1,40 @@
+ * Serving Flask app 'toomer_private_portal'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.25.146.15:8080
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Sep/2026 03:52:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Sep/2026 03:52:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [14/Sep/2026 03:53:30] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Sep/2026 03:53:36] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Sep/2026 03:54:13] "POST / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Sep/2026 03:54:51] "[32mPOST / HTTP/1.1[0m" 302 -
+127.0.0.1 - - [14/Sep/2026 03:54:51] "GET / HTTP/1.1" 200 -
+[2026-09-14 03:55:12,559] ERROR in app: Exception on /save_settings [POST]
+Traceback (most recent call last):
+  File "/home/kusha/toomer-agent/venv/lib/python3.14/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/kusha/toomer-agent/venv/lib/python3.14/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/kusha/toomer-agent/venv/lib/python3.14/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/kusha/toomer-agent/venv/lib/python3.14/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/kusha/toomer-agent/toomer_private_portal.py", line 344, in save_settings
+    c.execute("""
+    ~~~~~~~~~^^^^
+    UPDATE bot_settings
+    ^^^^^^^^^^^^^^^^^^^
+    SET active_exchange = ?, risk_per_trade = ?, coindcx_api_key = ?, coindcx_api_secret = ?, tradingview_secret = ?
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    WHERE id = 1
+    ^^^^^^^^^^^^
+    """, (exchange, risk, key, sec, tv))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: risk_per_trade
+127.0.0.1 - - [14/Sep/2026 03:55:12] "[35m[1mPOST /save_settings HTTP/1.1[0m" 500 -
+127.0.0.1 - - [14/Sep/2026 03:59:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Sep/2026 04:00:58] "GET / HTTP/1.1" 200 -
